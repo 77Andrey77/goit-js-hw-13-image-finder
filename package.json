@@ -51,7 +51,5 @@
     "url": "git+https://github.com/77Andrey77/goit-js-hw-12-countries.git"
   },
   "homepage": "https://github.com/77Andrey77/goit-js-hw-12-countries",
-  "dependencies": {
-    "lodash.debounce": "^4.0.8"
-  }
+  "dependencies": {}
 }
