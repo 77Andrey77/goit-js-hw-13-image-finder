@@ -31,8 +31,13 @@ function onSearch(e) {
 };
 
 function onLoadMore() {
-    newsApiService.feachArticales().then(appendHitsMarkup);
-      
+    newsApiService.feachArticales(
+            
+    window.scrollTo({
+        top: document.body.scrollHeight -1000 ,
+        behavior: 'smooth',
+    })
+    ).then(appendHitsMarkup);
 }
  
 function appendHitsMarkup(hits) {
@@ -43,5 +48,17 @@ function creatHitsContainer() {
     galleryEl.innerHTML = '';    
 }
 
+// function scrollOnLoadMore() {
+//     onLoadMore()
+//        .then(
+//       setTimeout(() => {
+//         window.scrollBy({
+//           top: document.documentElement.scrollTop,
+//           behavior: 'smooth',
+//         });
+//       }, 1500),
+//     )
+//     .catch(err => console.log(err));
+// }
 
 
