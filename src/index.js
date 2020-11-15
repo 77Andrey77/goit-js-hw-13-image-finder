@@ -10,15 +10,19 @@ const formEl = document.querySelector('.search-form');
 const inputEl = document.querySelector('.form-control');
 const galleryEl = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('[data-action="load-more"]');
+// const btn = document.querySelector('.button');
 
 const newsApiService = new NewsApiService();
 
+loadMoreVisibilityOff();
 formEl.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
+//  btn.classList.add("is-hidden");
 
 function onSearch(e) {
     e.preventDefault();
+    
 
     creatHitsContainer();
     newsApiService.query = e.currentTarget.elements.query.value;
@@ -31,17 +35,30 @@ function onSearch(e) {
 };
 
 function onLoadMore() {
-    newsApiService.feachArticales(
-            
-    window.scrollTo({
-        top: document.body.scrollHeight -1000 ,
+    newsApiService.feachArticales().then(appendHitsMarkup);
+
+    // window.scrollTo({
+    //     top: document.body.scrollHeight -1000 ,
+    //     behavior: 'smooth',
+    // })
+    setTimeout(() => {
+        window.scrollTo({
+        top: document.body.scrollHeight -1300 ,
         behavior: 'smooth',
     })
-    ).then(appendHitsMarkup);
+    },1000)
 }
  
 function appendHitsMarkup(hits) {
-    galleryEl.insertAdjacentHTML('beforeend', cardTpl(hits));    
+    if (hits.length < 12) {
+        loadMoreVisibilityOff();
+    } else {
+        loadMoreVisibilityOn();
+    }
+
+    galleryEl.insertAdjacentHTML('beforeend', cardTpl(hits)); 
+
+    
 }
 
 function creatHitsContainer() {
@@ -61,4 +78,11 @@ function creatHitsContainer() {
 //     .catch(err => console.log(err));
 // }
 
+function loadMoreVisibilityOff() {
+    loadMoreBtn.classList.add("is-hidden");
+}
+
+function loadMoreVisibilityOn() {
+    loadMoreBtn.classList.remove("is-hidden");
+}
 

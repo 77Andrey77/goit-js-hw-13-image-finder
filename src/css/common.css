@@ -37,6 +37,9 @@ input {
     background-color: rgb(223, 35, 35);
     color: rgb(255, 255, 255);
 }
+.is-hidden {
+    display: none;
+}
 
 /* gallery List */
 
