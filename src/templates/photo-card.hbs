@@ -1,4 +1,5 @@
-<div class="photo-card">
+{{#each this}}
+<li class="photo-card">
     <img src="{{webformatURL}}" alt="{{tags}}" />
 
     <div class="stats">
@@ -19,4 +20,5 @@
             {{downloads}}
         </p>
     </div>
-</div>
+</li>
+{{/each}}
